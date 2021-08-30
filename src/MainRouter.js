@@ -7,6 +7,8 @@ import NavMotion from './layout/NavMotion';
 import MainLayout from './layout/MainLayout';
 import MinimalLayout from './layout/MinimalLayout';
 import DashboardRoute from "./views/DashboardRoute"
+import PrivateRoute from "./component/PrivateRoute"
+import { useSelector } from 'react-redux';
 
 const AuthLogin = lazy(() => import('./views/Login'));
 const Register = lazy(() => import('./views/Register'));
@@ -26,12 +28,13 @@ const MultiLanguage = lazy(() => import('./views/MultiLanguage'));
 
 const Routes = () => {
     const location = useLocation();
-
+    const auth = useSelector(state => state.auth)
+    
+    console.log({auth})
     return (
         <AnimatePresence>
             <Suspense fallback={<Loader />}>
                 <Switch>
-                    <Redirect exact from="/" to="/login" />
                     <Route path={`/login`} component={AuthLogin} />
                     <Route path={`/register`} component={Register} />
                     <Route path={[]}>
@@ -41,7 +44,9 @@ const Routes = () => {
                             </Switch>
                         </MinimalLayout>
                     </Route>
-                    <Route path="/dashboard" component={DashboardRoute} />
+                    <PrivateRoute isLoading={auth.loading} isAuthenticated={auth.isAuthenticated}
+                     path="/dashboard" component={DashboardRoute} />
+                    <Redirect to="/login" />
                     {/* <Route
                         path={[
                             '/register',

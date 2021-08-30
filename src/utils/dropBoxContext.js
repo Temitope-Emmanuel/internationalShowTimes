@@ -22,6 +22,7 @@ import useAlertService from "../utils/alertContext"
     const redirectUrl = "http://localhost:3000/dashboard/redirect"
     const storageKey = "codeVerifier"
     const returnHref = "returnHref"
+
     // Get an authentication url
     const doAuth = () => {
         dbx.getAuthenticationUrl(redirectUrl, undefined, 'code', 'offline', undefined, undefined, true)
@@ -133,6 +134,9 @@ import useAlertService from "../utils/alertContext"
     const uploadFiles = (arg) => {
         return dropbox.current.filesUpload(arg)
     }
+    const reAuthenticate = () => {
+
+    }
 
     return(
         <DropBoxContextProvider
@@ -141,10 +145,11 @@ import useAlertService from "../utils/alertContext"
                 doAuth,
                 checkUrl,
                 isLoaded,
-                uploadFiles,
+                isLoggedIn,
                 getFolders,
+                uploadFiles,
+                reAuthenticate,
                 uploadLargeFiles,
-                isLoggedIn
             }}
         >
             {children}

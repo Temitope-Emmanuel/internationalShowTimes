@@ -4,6 +4,8 @@ import {useParams} from "react-router-dom"
 import { makeStyles, useMediaQuery, useTheme, AppBar, CssBaseline, Toolbar } from '@material-ui/core';
 
 import { drawerWidth } from './../../store/constant';
+import {getRefreshToken} from "../../utils/auth"
+import useDropBoxService from "../../utils/dropBoxContext"
 import Header from './Header';
 import Sidebar from './Sidebar';
 
@@ -57,6 +59,7 @@ const MainLayout = ({ children }) => {
     const theme = useTheme();
     const matchUpMd = useMediaQuery(theme.breakpoints.up('md'));
     const [drawerOpen, setDrawerOpen] = React.useState(false);
+    const dropbox = useDropBoxService()
 
     const handleDrawerToggle = () => {
         setDrawerOpen(!drawerOpen);
@@ -65,6 +68,13 @@ const MainLayout = ({ children }) => {
     React.useEffect(() => {
         setDrawerOpen(matchUpMd);
     }, [matchUpMd]);
+    
+    React.useEffect(() => {
+        const dropboxAccessToken = getRefreshToken()
+        if(dropboxAccessToken){
+            dropbox.reAuthenticate(dropboxAccessToken)
+        }
+    },[])
 
     return (
         <div className={classes.root}>

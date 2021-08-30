@@ -2,10 +2,12 @@ import React from 'react';
 import {useHistory} from "react-router-dom"
 import { Card,Button, CardContent, Divider, Typography, makeStyles, Grid, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import {useDispatch} from "react-redux"
 import {User} from "../../utils/user"
 import Logo from './../../assets/images/logo-dark.svg';
-import useDropBoxService from '../../utils/dropBoxContext';
 import  useAlertService  from '../../utils/alertContext';
+import * as ActionType from "../../store/Auth/actions"
+import {saveToken} from "../../utils/auth"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -49,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 const Register = () => {
     const classes = useStyles();
     const history = useHistory()
-    const dropBox = useDropBoxService()
+    const dispatch = useDispatch()
     const alert = useAlertService()
     const [email,setEmail] = React.useState("")
     const [password,setPassword] = React.useState("")
@@ -70,9 +72,18 @@ const Register = () => {
             email,password,username
         })
         newUser.save().then(async response => {
-            const data = await response.json()
-            console.log("this is the response",{data})
+            const {token,...data} = response
+            saveToken(token)
+            dispatch({
+                type:ActionType.LOGGED_IN,
+                payload:data
+            })
             history.push(`/dashboard/${response.id}/home`)
+            alert({
+                type:"success",
+                message:`Successfully Logged In`,
+                title:"Credentials Valid"
+            })
         }).catch(err => {
             alert({
                 type:"error",
@@ -80,11 +91,6 @@ const Register = () => {
                 title:"Something went wrong"
             })
         })
-    }
-
-    const getFiles = () => {
-        dropBox.doAuth()
-        
     }
 
     return (
@@ -122,7 +128,7 @@ const Register = () => {
                                     variant="outlined"
                                 />
                             </Grid>
-                            <Grid item container xs={12}>
+                            <Grid container justifyContent="space-between" spacing={2}>
                                 <Grid item md={5}>
                                     <TextField
                                         fullWidth value={username}
@@ -135,7 +141,7 @@ const Register = () => {
                                         variant="outlined"
                                     />
                                 </Grid>
-                                <Grid item md={6}>
+                                <Grid item md={5}>
                                     <TextField
                                         fullWidth value={password}
                                         label="Password" onChange={handlePasswordChange}
@@ -150,9 +156,6 @@ const Register = () => {
                             <Grid item>
                                 <Button variant="contained" onClick={createNewUser}>
                                     Register
-                                </Button>
-                                <Button onClick={getFiles} variant="contained">
-                                    Register with Dropbox
                                 </Button>
                             </Grid>
                             <Divider />

@@ -83,8 +83,6 @@ const TableBasic = () => {
         }
     }
 
-    console.log({currentFileList})
-    
     // Get the user root folder
     React.useEffect(() => {
         if (isLoggedIn) {        

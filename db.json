@@ -2,58 +2,10 @@
   "users": [
     {
       "username": "omoOlogoYhammy",
-      "email": "Temitopeojo0@gmail.com",
-      "password": "$2a$10$mo1QDccSqZwANeIn2314juaGvc8.dGtJihgQH6R0LMKLFqnF6SxOO",
+      "salt": "$2a$10$XUPjcyn9hExjqFjzZwCA9O",
+      "email": "temitopeojo0@gmail.com",
+      "password": "$2a$10$XUPjcyn9hExjqFjzZwCA9OFKp3r.QnOqZP0KDSxoN.N.dy4hJU0vu",
       "id": 1
-    },
-    {
-      "username": "omoOlogo",
-      "salt": "$2a$10$6bIFSpoXshITJH/PAGyHPO",
-      "email": "temitopeojo0@gmail.com",
-      "password": "$2a$10$6bIFSpoXshITJH/PAGyHPOx/ogLDi.Z4.5UI0Ifu91G1iNxuBfUju",
-      "id": 2
-    },
-    {
-      "username": "omoOlogo",
-      "salt": "$2a$10$LbY1dFq83X//V2yd.Mr20u",
-      "email": "temitopeojo0@gmail.com",
-      "password": "$2a$10$LbY1dFq83X//V2yd.Mr20uDtk1u.bR48sZWl6XZw2dPGPz4c0Y/Mu",
-      "id": 3
-    },
-    {
-      "username": "omoOlogo",
-      "salt": "$2a$10$TkZV8pHbW4A1ojEmgaFA5u",
-      "email": "temitopeojo0@gmail.com",
-      "password": "$2a$10$TkZV8pHbW4A1ojEmgaFA5uMdB5X0LB5N/rzdAOa/e0Fi6SGxxmrnW",
-      "id": 4
-    },
-    {
-      "username": "admin@gmail.com",
-      "salt": "$2a$10$EA06uOiIqi0aXtS0lAxs5.",
-      "email": "wewleklklwe",
-      "password": "$2a$10$EA06uOiIqi0aXtS0lAxs5.h0KkG/N6dvMFfh5i7CWOH8QwfhuFWgG",
-      "id": 5
-    },
-    {
-      "username": "admin@gmail.com",
-      "salt": "$2a$10$mL5Fk3KAn.sJf6fzPIUx9u",
-      "email": "lr;el;rl;;",
-      "password": "$2a$10$mL5Fk3KAn.sJf6fzPIUx9u6KW73EmYt3K/Wr1U1xin1QePnIOasgC",
-      "id": 6
-    },
-    {
-      "username": "admin@gmail.com",
-      "salt": "$2a$10$aeSt01..TKeAQkDBElrWse",
-      "email": "klklkdflldf",
-      "password": "$2a$10$aeSt01..TKeAQkDBElrWseY0IFbnqQbfHUvm8qmdXNXRundxal/Om",
-      "id": 7
-    },
-    {
-      "username": "admin@gmail.com",
-      "salt": "$2a$10$/ozPJ7I0DW2TgH4HUVN0gu",
-      "email": "weklwekl",
-      "password": "$2a$10$/ozPJ7I0DW2TgH4HUVN0guwBliME5w0zI/PdsZ4jE60x7FPOt0q2O",
-      "id": 8
     }
   ]
 }

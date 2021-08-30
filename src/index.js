@@ -2,18 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from 'react-router-dom';
 
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 import App from './layout/App';
-import reducer from './store/reducer';
 import config from './config';
 import './assets/scss/style.scss';
 import * as serviceWorker from './serviceWorker';
 import {createBrowserHistory} from "history"
+import configureStore from  "./store/index"
 
-const store = createStore(reducer);
-
+const store = configureStore()
 const history = createBrowserHistory()
 
 ReactDOM.render(

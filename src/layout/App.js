@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { IntlProvider } from 'react-intl';
 
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
@@ -15,6 +15,9 @@ import rtl from 'jss-rtl';
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 import { DropBoxProvider } from '../utils/dropBoxContext';
 import { AlertServiceProvider } from '../utils/alertContext';
+import {getToken} from "../utils/auth"
+import {User} from "../utils/user"
+import * as ActionTypes from "../store/Auth/actions"
 
 function loadLocaleData(locale) {
     switch (locale) {
@@ -32,6 +35,7 @@ function loadLocaleData(locale) {
 // Configure JSS
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 const App = () => {
+    const dispatch = useDispatch()
     const customization = useSelector((state) => state.customization);
     const [messages, setMessages] = useState();
 
@@ -40,6 +44,32 @@ const App = () => {
             setMessages(d.default);
         });
     }, [customization]);
+    const checkLoggedIn = async () => {
+        dispatch({
+            type:ActionTypes.IS_LOADING
+        })
+        const authToken = await getToken()
+        if(authToken){
+            const user = await User.verify(authToken)
+            console.log({user})
+            if(user){
+                dispatch({
+                    type:ActionTypes.LOGGED_IN,
+                    payload:user
+                })
+                dispatch({
+                    type:ActionTypes.NOT_LOADING
+                })
+            }
+        }else{
+            dispatch({
+                type:ActionTypes.NOT_LOADING
+            })
+        }
+    }
+    useEffect(() => {
+        checkLoggedIn()
+    },[])
 
     return (
         <React.Fragment>
