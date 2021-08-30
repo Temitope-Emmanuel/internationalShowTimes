@@ -2,11 +2,14 @@ import React from 'react';
 
 import { makeStyles, Fade, Button, ClickAwayListener, Paper, Popper, List, ListItem, ListItemText, ListItemIcon } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-
+import {useHistory} from "react-router-dom"
 import PersonTwoToneIcon from '@material-ui/icons/PersonTwoTone';
 import DraftsTwoToneIcon from '@material-ui/icons/DraftsTwoTone';
 import LockOpenTwoTone from '@material-ui/icons/LockOpenTwoTone';
 import SettingsTwoToneIcon from '@material-ui/icons/SettingsTwoTone';
+import {useDispatch} from "react-redux"
+import * as ActionTypes from "../../../../store/Auth/actions"
+import {removeToken} from "../../../../utils/auth"
 import AccountCircleTwoToneIcon from '@material-ui/icons/AccountCircleTwoTone';
 import MeetingRoomTwoToneIcon from '@material-ui/icons/MeetingRoomTwoTone';
 
@@ -39,6 +42,8 @@ const useStyles = makeStyles((theme) => ({
 
 const ProfileSection = () => {
     const classes = useStyles();
+    const history = useHistory()
+    const dispatch = useDispatch()
 
     const [selectedIndex, setSelectedIndex] = React.useState(1);
     const [open, setOpen] = React.useState(false);
@@ -50,6 +55,13 @@ const ProfileSection = () => {
             //handleLogout;
         }
     };
+    const handleLogout = () => {
+        dispatch({
+            type:ActionTypes.LOG_OUT
+        })
+        removeToken()
+        history.push("/login")
+    }
 
     const handleToggle = () => {
         setOpen((prevOpen) => !prevOpen);
@@ -108,7 +120,7 @@ const ProfileSection = () => {
                         <Paper>
                             <ClickAwayListener onClickAway={handleClose}>
                                 <List component="nav" className={classes.root}>
-                                    <ListItem button selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0)}>
+                                    {/* <ListItem button selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0)}>
                                         <ListItemIcon>
                                             <SettingsTwoToneIcon />
                                         </ListItemIcon>
@@ -137,8 +149,8 @@ const ProfileSection = () => {
                                             <LockOpenTwoTone />
                                         </ListItemIcon>
                                         <ListItemText primary="Lock Screen" />
-                                    </ListItem>
-                                    <ListItem button selected={selectedIndex === 4}>
+                                    </ListItem> */}
+                                    <ListItem button onClick={handleLogout}>
                                         <ListItemIcon>
                                             <MeetingRoomTwoToneIcon />
                                         </ListItemIcon>
