@@ -64,6 +64,7 @@ import {saveRefreshToken,getRefreshToken} from "../utils/auth"
                 auth:dbx
             })
             setIsLoggedIn(true)
+            setIsLoaded(true)
         }).catch(err => {
             console.log("this is the errr",{err})
         })

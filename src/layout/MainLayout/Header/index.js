@@ -46,11 +46,12 @@ const Header = (props) => {
                     <Hidden smDown>
                         <Grid item>
                             <Box mt={0.5}>
-                                <img src={logo} alt="Logo" />
+                                International ShowTimes
+                                {/* <img src={logo} alt="Logo" /> */}
                             </Box>
                         </Grid>
                     </Hidden>
-                    <Grid item>
+                    {/* <Grid item>
                         <IconButton
                             edge="start"
                             className={classes.menuButton}
@@ -60,7 +61,7 @@ const Header = (props) => {
                         >
                             <MenuTwoToneIcon className={classes.menuIcon} />
                         </IconButton>
-                    </Grid>
+                    </Grid> */}
                 </Grid>
             </Box>
             <div className={classes.grow} />
