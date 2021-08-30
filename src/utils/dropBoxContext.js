@@ -52,9 +52,9 @@ import useAlertService from "../utils/alertContext"
         })
     }
 
-    const getFileFolder = () => {
+    const getFolders = (path) => {
         if(isLoggedIn && dropbox.current){
-            return dropbox.current.filesListFolder({path:""}).then(response => {
+            return dropbox.current.filesListFolder(path).then(response => {
                 return response.result.entries
             }).catch(err => {
                 console.log("this is the error",{err})
@@ -142,7 +142,7 @@ import useAlertService from "../utils/alertContext"
                 checkUrl,
                 isLoaded,
                 uploadFiles,
-                getFileFolder,
+                getFolders,
                 uploadLargeFiles,
                 isLoggedIn
             }}

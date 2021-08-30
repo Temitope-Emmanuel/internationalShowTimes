@@ -65,9 +65,9 @@ const Header = (props) => {
             </Box>
             <div className={classes.grow} />
 
-            <SearchSection theme="light" />
+            {/* <SearchSection theme="light" />
             <Customization />
-            <NotificationSection />
+            <NotificationSection /> */}
             <ProfileSection />
         </React.Fragment>
     );
