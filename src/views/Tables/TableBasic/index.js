@@ -73,7 +73,7 @@ const TableBasic = () => {
     const { getInputProps, getRootProps } = useDropzone({ onDrop });
 
     const getDirectories = async (path) => {
-        const filesResult = await dropbox.getFolders(path);
+        const filesResult = await dropbox.getFolders(path)
         return filesResult ?? []
     };
     const getRootDirectory = async() => {
@@ -190,12 +190,12 @@ const TableBasic = () => {
                     Folder List
                 </Typography>
             </Breadcrumb>
-            {!dropbox.isLoggedIn && (
+            {!isLoggedIn && (
                 <Button className={classes.dropBoxButton} variant="contained" disabled={dropbox.isLoaded} onClick={dropbox.doAuth}>
                     Connect To Dropbox
                 </Button>
             )}
-            {true && (
+            {isLoggedIn && (
                 <Button disabled={submitting} className={classes.dropBoxButton} variant="contained" onClick={handleUploadToggle}>
                     {showUpload ? 'Close Upload Form' : 'Show Upload Form'}
                 </Button>
@@ -230,7 +230,8 @@ const TableBasic = () => {
                             </IconButton>
                         </label>
                     </Box>
-                    <Button disabled={!files.name || submitting} onClick={uploadDocument} variant="contained">
+                    <Button disabled={!files.name || submitting || !select.length}
+                     onClick={uploadDocument} variant="contained">
                         Upload
                     </Button>
                 </Box>

@@ -5,6 +5,7 @@ import {createGenericContext} from "."
 import {Dropbox,DropboxAuth} from "dropbox" 
 import {useHistory} from "react-router-dom"
 import useAlertService from "../utils/alertContext"
+import {saveRefreshToken,getRefreshToken} from "../utils/auth"
 
   const [useDropBoxService,DropBoxContextProvider] = createGenericContext()
   
@@ -22,6 +23,21 @@ import useAlertService from "../utils/alertContext"
     const redirectUrl = "http://localhost:3000/dashboard/redirect"
     const storageKey = "codeVerifier"
     const returnHref = "returnHref"
+
+    React.useEffect(() => {
+       const refreshToken = getRefreshToken()
+       if(refreshToken && dbx){
+           dbx.setRefreshToken(refreshToken)
+           dropbox.current = new Dropbox({
+               auth:dbx
+           })
+           setIsLoggedIn(true)
+           setIsLoaded(true)
+            // dbx.checkAndRefreshAccessToken().then(response => {
+            //     console.log("this is the response",{response})
+            // })
+        }
+    },[dbx])
 
     // Get an authentication url
     const doAuth = () => {
@@ -43,7 +59,7 @@ import useAlertService from "../utils/alertContext"
         
         dbx.getAccessTokenFromCode(redirectUrl,argString).then(response => {
             dbx.setAccessToken(response.result.access_token)
-            
+            saveRefreshToken(response.result.refresh_token)
             dropbox.current = new Dropbox({
                 auth:dbx
             })

@@ -44,6 +44,7 @@ const App = () => {
             setMessages(d.default);
         });
     }, [customization]);
+    
     const checkLoggedIn = async () => {
         dispatch({
             type:ActionTypes.IS_LOADING
@@ -51,7 +52,6 @@ const App = () => {
         const authToken = await getToken()
         if(authToken){
             const user = await User.verify(authToken)
-            console.log({user})
             if(user){
                 dispatch({
                     type:ActionTypes.LOGGED_IN,
