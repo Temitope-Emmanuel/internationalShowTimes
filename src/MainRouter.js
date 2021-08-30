@@ -30,7 +30,6 @@ const Routes = () => {
     const location = useLocation();
     const auth = useSelector(state => state.auth)
     
-    console.log({auth})
     return (
         <AnimatePresence>
             <Suspense fallback={<Loader />}>

@@ -13,21 +13,21 @@ export class User {
         this.username = username;
         this.email = email;
         this.id = id;
-        this.salt = this.makeSalt()
-        this.password = this.encryptPassword(password,this.salt)
+        if(id){
+            this.password = password
+        }else{
+            this.password = this.#encryptPassword(password)
+        }
     }
 
-    encryptPassword = (password,salt) => {
-        return bcrypt.hashSync(password,salt)
+    #encryptPassword = (password) => {
+        const encryptedPassword =  bcrypt.hashSync(password)
+        return encryptedPassword
     }
 
     authenticate = (plainText) => {
-        return bcrypt.compareSync(this.password,plainText)
+        return bcrypt.compare(plainText,this.password)
     }
-
-    makeSalt = () => {
-        return bcrypt.genSaltSync(10)
-      }
 
     save = () => {
          return fetch("http://localhost:4001/users",{
@@ -37,7 +37,6 @@ export class User {
             },
             body:JSON.stringify({
                 username:this.username,
-                salt:this.salt,
                 email:this.email,
                 password:this.password
             })
@@ -48,8 +47,7 @@ export class User {
                 token,
                 id:data.id,
                 email:this.email,
-                username:this.username,
-                password:this.password
+                username:this.username
             })
         })
     }
@@ -77,7 +75,7 @@ export class User {
             if(allUser){
                 const foundUser = allUser.find(item => item.id === decoded.id)
                 if(foundUser){
-                    const {salt,password,...user} = foundUser
+                    const {password,...user} = foundUser
                     return user
                 }else{
                     return false
@@ -91,18 +89,25 @@ export class User {
         }
     }
 
-    static login = (email,password) => {
-        return this.#loadAll().then(response => {
-            const foundUser = response.find((item) => item.email === email)
-            if(foundUser){
+    static login = ({email,password}) => {
+        return this.#loadAll().then(async response => {
+            const foundUser = response.find( (item) => item.email === email)
+            if(foundUser?.id){
                 const newUser = new User(foundUser)
-                if(newUser.authenticate(password)){
-                    return true
+                const passwordCheck = await newUser.authenticate(password)
+                if(passwordCheck){
+                    const token = newUser.generateJwt(newUser.id)
+                    return({
+                        token,
+                        id:newUser.id,
+                        username:newUser.username,
+                        email:newUser.email
+                    })
                 }else{
-                    return false
+                    throw new Error("Password do not match")
                 }
             }else{
-                return false
+                 throw new Error("User does not exist")
             }
         })
     }

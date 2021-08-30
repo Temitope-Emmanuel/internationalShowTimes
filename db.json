@@ -1,10 +1,9 @@
 {
   "users": [
     {
-      "username": "omoOlogoYhammy",
-      "salt": "$2a$10$XUPjcyn9hExjqFjzZwCA9O",
-      "email": "temitopeojo0@gmail.com",
-      "password": "$2a$10$XUPjcyn9hExjqFjzZwCA9OFKp3r.QnOqZP0KDSxoN.N.dy4hJU0vu",
+      "username": "patrolOfficer",
+      "email": "patrol@officer.com",
+      "password": "$2a$10$A.WzsPoj2QjoIDJ/TrbaDuqttSghkiB0CYkVpYwlLJ29.WQSQJdXO",
       "id": 1
     }
   ]

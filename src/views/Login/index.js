@@ -1,9 +1,11 @@
 import React from 'react';
+import {useDispatch} from "react-redux"
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import {User} from "../../utils/user"
 import { Card, CardContent,Button, Divider, Typography, makeStyles, Grid, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-
+import {saveToken} from "../../utils/auth"
+import * as ActionType from "../../store/Auth/actions"
 import Logo from './../../assets/images/logo-dark.svg';
 import useAlertService from '../../utils/alertContext';
 
@@ -44,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
 const Login = () => {
     const classes = useStyles();
     const history = useHistory()
+    const dispatch = useDispatch()
     const alert = useAlertService()
     const [email,setEmail] = React.useState("")
     const [password,setPassword] = React.useState("")
@@ -55,8 +58,23 @@ const Login = () => {
         setPassword(e.currentTarget.value)
     }
     const handleSubmit = () => {
-        User.find({email,password}).then(response => {
-            history.push(`/dashboard/${response.body.user.id}/home`)
+        User.login({email,password}).then(response => {
+            const {token,...data} = response
+            console.log({
+                token,
+                ...data
+            })
+            saveToken(token)
+            dispatch({
+                type:ActionType.LOGGED_IN,
+                payload:data
+            })
+            alert({
+                type:"success",
+                message:`Successfully Logged In`,
+                title:"Credentials Valid"
+            })
+            history.push(`/dashboard/${response.id}/home`)
         }).catch(err => {
             alert({
                 type:"error",
@@ -112,7 +130,7 @@ const Login = () => {
                             </Grid>
                             <Grid item>
                                 <Button variant="contained" onClick={handleSubmit}>
-                                    Login with Dropbox
+                                    Login
                                 </Button>
                             </Grid>
                             <Divider />
