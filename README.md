@@ -1,12 +1,24 @@
-# Introduction
+# Internation ShowTimes Frontend
 
-This is material design template created based on materially structure
+## How to run
 
-# Getting Started
+First clone the repo with
 
-1. Installation process
-    - run 'npm install'
-    - start dev server run 'npm run start'
-2. Deployment process
-    - Goto full-version directory and open package.json. Update homepage URL to the production URL
-    - Goto full-version directory and run 'npm run build'
+
+Then 
+
+
+```
+cd ./internationalShowTimes
+```
+```
+mv ./env.example ./env
+```
+
+Add in the necessary env variable
+```
+npm start
+```
+this will start bothe the server and the client application
+
+Created by Temitope Emamnuel Ojo
