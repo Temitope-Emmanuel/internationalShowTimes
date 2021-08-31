@@ -14,9 +14,9 @@ RUN yarn install
 COPY . .
 RUN yarn build
 
-FROM nginx:1.15.2-alpine AS production
+FROM nginx:1.21.0-alpine AS production
 ENV NODE_ENV=production
-COPY --from=build /app/build /var/www
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /app/build /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]

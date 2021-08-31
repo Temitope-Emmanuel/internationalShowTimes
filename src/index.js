@@ -8,18 +8,18 @@ import App from './layout/App';
 import config from './config';
 import './assets/scss/style.scss';
 import * as serviceWorker from './serviceWorker';
-import {createBrowserHistory} from "history"
-import configureStore from  "./store/index"
+import { createBrowserHistory } from 'history';
+import configureStore from './store/index';
 
-const store = configureStore()
-const history = createBrowserHistory()
+const store = configureStore();
+const history = createBrowserHistory();
 
 ReactDOM.render(
-    <Provider store={store}>
-        <Router history={history} basename={config.basename}>
+    <Router history={history}>
+        <Provider store={store}>
             <App />
-        </Router>
-    </Provider>,
+        </Provider>
+    </Router>,
     document.getElementById('root')
 );
 

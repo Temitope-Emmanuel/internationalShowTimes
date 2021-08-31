@@ -7,7 +7,7 @@ services:
       context: .
       target: production
     ports: 
-      - "4001:80"
+      - "3000:80"
     environment:
       - REACT_APP_DBX_ACCESS_TOKEN=sl.A3W0YS3m9kCKGV9bH7ojpHRWL1zzplYTi5renDeIoLmd9NrJqJwUedok0vT7bnBlo_BhlohM5ZxNEAZKZx7uPYTppMg
       - REACT_APP_APP_KEY=sr0wzme4iipjy2c
