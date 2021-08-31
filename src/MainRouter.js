@@ -34,13 +34,6 @@ const Routes = () => {
         <AnimatePresence>
             <Suspense fallback={<Loader />}>
                 <Switch>
-                    <Route path={`/`} component={() => {
-                        return(
-                            <div>
-                                This is a div
-                            </div>
-                        )
-                    }} />
                     <Route path={`/login`} component={AuthLogin} />
                     <Route path={`/register`} component={Register} />
                     <Route path={[]}>

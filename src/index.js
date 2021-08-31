@@ -5,7 +5,6 @@ import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import App from './layout/App';
-import config from './config';
 import './assets/scss/style.scss';
 import * as serviceWorker from './serviceWorker';
 import { createBrowserHistory } from 'history';
