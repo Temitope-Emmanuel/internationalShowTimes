@@ -6,8 +6,10 @@ import Redirect from '../views/Redirect';
 
 const TableBasic = lazy(() => import('../views/Tables/TableBasic'));
 
+
 const DashboardRoute = () => {
     const { path } = useRouteMatch();
+    console.log("listening loud and clear")
 
     return (
         <MainLayout>

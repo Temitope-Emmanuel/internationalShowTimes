@@ -1,5 +1,5 @@
 {
-    "name": "Materially22",
+    "name": "internationalshowtimes",
     "version": "4.11.0",
     "private": true,
     "homepage": "http://lite.codedthemes.com/materially/",
@@ -64,7 +64,8 @@
     "scripts": {
         "start:client": "react-scripts start",
         "start:server": "json-server --watch db.json --port 4001",
-        "start": "npm run start:client && npm run start:server",
+        "dev": "docker-compose -f docker-compose.dev.yml up",
+        "start": "npm run start:client",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"

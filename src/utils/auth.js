@@ -18,6 +18,6 @@ export const saveRefreshToken = (token) => {
 export const getRefreshToken = () => {
     return localStorage.getItem(dropboxRefreshToken) || null;
 }
-export const refreshToken = () => {
+export const removeRefreshToken = () => {
     localStorage.removeItem(dropboxRefreshToken)
 }

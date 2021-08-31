@@ -5,7 +5,7 @@ import {createGenericContext} from "."
 import {Dropbox,DropboxAuth} from "dropbox" 
 import {useHistory} from "react-router-dom"
 import useAlertService from "../utils/alertContext"
-import {saveRefreshToken,getRefreshToken} from "../utils/auth"
+import {saveRefreshToken,removeRefreshToken,getRefreshToken} from "../utils/auth"
 
   const [useDropBoxService,DropBoxContextProvider] = createGenericContext()
   
@@ -31,11 +31,19 @@ import {saveRefreshToken,getRefreshToken} from "../utils/auth"
            dropbox.current = new Dropbox({
                auth:dbx
            })
-           setIsLoggedIn(true)
-           setIsLoaded(true)
-            // dbx.checkAndRefreshAccessToken().then(response => {
-            //     console.log("this is the response",{response})
-            // })
+           console.log(dropbox.current.checkUser)
+           dropbox.current.checkUser({
+               query:"user"
+           }).then((response => {
+               if(response.status === 200){
+                   setIsLoggedIn(true)
+                   setIsLoaded(true)
+               }else{
+                   removeRefreshToken()
+               }
+           })).catch(err => {
+               console.log("there's been an err",{err})
+           })
         }
     },[dbx])
 

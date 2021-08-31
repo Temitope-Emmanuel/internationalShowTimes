@@ -60,10 +60,6 @@ const Login = () => {
     const handleSubmit = () => {
         User.login({email,password}).then(response => {
             const {token,...data} = response
-            console.log({
-                token,
-                ...data
-            })
             saveToken(token)
             dispatch({
                 type:ActionType.LOGGED_IN,
