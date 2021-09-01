@@ -14,4 +14,3 @@ services:
       - REACT_APP_CLIENT_SECRET=ca173k58axfaffj
       - REACT_APP_JWT_SECRET=CLOUDINARY_API_SECRETdOMZH_KJQaAiGgrp0NViVGvWZ4M
       - REACT_APP_SERVER_URL=localhost:4001
-      - REACT_APP_DROPBOX_REDIRECT=localhost:3000/dashboard/redirect

@@ -40,7 +40,7 @@ export class User {
                 email:this.email,
                 password:this.password
             })
-        }).then(async response => {Ppac
+        }).then(async response => {
             const data = await response.json()
             const token = this.generateJwt(data.id)
             return({
