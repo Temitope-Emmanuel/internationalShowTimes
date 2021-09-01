@@ -15,8 +15,4 @@ export default {
         appId: '1:478479518287:web:aa68a391320608737ff83a',
         measurementId: 'G-ZRET4JXFZH',
     },
-    auth0: {
-        client_id: 'HvYn25WaEHb7v5PBT7cTYe98XATStX3r',
-        domain: 'demo-localhost.us.auth0.com',
-    },
 };

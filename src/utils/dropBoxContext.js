@@ -20,7 +20,7 @@ import {saveRefreshToken,removeRefreshToken,getRefreshToken} from "../utils/auth
         fetch
     }))
     const dropbox = React.useRef(null)
-    const redirectUrl = "http://localhost:3000/dashboard/redirect"
+    const redirectUrl = `${process.env.REACT_APP_CLIENT_URL}/dashboard/redirect`
     const storageKey = "codeVerifier"
     const returnHref = "returnHref"
 

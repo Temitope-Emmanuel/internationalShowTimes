@@ -1,10 +1,6 @@
 {
-  "users": [
-    {
-      "username": "patrolOfficer",
-      "email": "patrol@officer.com",
-      "password": "$2a$10$A.WzsPoj2QjoIDJ/TrbaDuqttSghkiB0CYkVpYwlLJ29.WQSQJdXO",
-      "id": 1
-    }
-  ]
+    "posts": [{ "id": 1, "title": "json-server", "author": "typicode" }],
+    "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
+    "profile": { "name": "typicode" },
+    "users":[]
 }

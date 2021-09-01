@@ -1,23 +1,33 @@
 version: "3"
 
 services:
-  react-app:
+  # react-app:
+  #   stdin_open: true
+  #   tty: true
+  #   build:
+  #     context: .
+  #     target: development
+  #   ports: 
+  #     - "3000:3000"
+  #   volumes: 
+  #     - ./src:/app/src
+  #   env_file: 
+  #     - .env
+  #   environment:
+  #     - REACT_APP_DBX_ACCESS_TOKEN=
+  #     - REACT_APP_APP_KEY=
+  #     - REACT_APP_CLIENT_SECRET=
+  #     - REACT_APP_JWT_SECRET=
+  #     - REACT_APP_SERVER_URL=
+  #     - REACT_APP_DROPBOX_REDIRECT=
+  #     - CHOKIDAR_USEPOLLING=true
+
+  server:
+    image: clue/json-server
     stdin_open: true
     tty: true
     build:
       context: .
-      target: development
-    ports: 
+      target: server
+    ports:
       - "3000:3000"
-    volumes: 
-      - ./src:/app/src:ro
-      env_file: 
-      - .env
-    environment:
-      - REACT_APP_DBX_ACCESS_TOKEN=
-      - REACT_APP_APP_KEY=
-      - REACT_APP_CLIENT_SECRET=
-      - REACT_APP_JWT_SECRET=
-      - REACT_APP_SERVER_URL=
-      - REACT_APP_DROPBOX_REDIRECT=
-      - CHOKIDAR_USEPOLLING=true

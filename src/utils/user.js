@@ -30,7 +30,7 @@ export class User {
     }
 
     save = () => {
-         return fetch("http://localhost:4001/users",{
+         return fetch(`${process.env.REACT_APP_SERVER_URL}/users`,{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"
@@ -40,7 +40,7 @@ export class User {
                 email:this.email,
                 password:this.password
             })
-        }).then(async response => {
+        }).then(async response => {Ppac
             const data = await response.json()
             const token = this.generateJwt(data.id)
             return({
@@ -58,7 +58,7 @@ export class User {
         },config.jwtSecret)
     }
     static #loadAll = () => {
-        return fetch("http://localhost:4001/users",{
+        return fetch(`${process.env.REACT_APP_SERVER_URL}/users`,{
             method:"GET"
         }).then(async response => {
             const data = await response.json()
